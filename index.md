@@ -68,7 +68,7 @@ title: Josh Stafki
   </a>
 
   <a href="https://x.com/joshstafki?s=21" target="_blank">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/9/9f/X_logo_2023.svg" class="icon" alt="X Logo"/> @joshstafki
+    <img src="https://icon2.cleanpng.com/20240119/ta/transparent-x-logo-logo-brand-identity-company-organization-black-background-white-x-logo-for-1710915881389.webp" class="icon" alt="X Logo"/> @joshstafki
   </a>
 
   <a href="https://open.spotify.com/user/31coy7zzjdxsugr3i3dlcxx4whsu?si=Wz6ICs4bTZm8EGK3yffzEA" target="_blank">
