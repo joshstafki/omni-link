@@ -1,2 +1,0 @@
-# omni-link
-omni-link
