@@ -21,8 +21,8 @@ title: Josh Stafki
   }
 
   img.profile {
-    width: 220px;
-    height: 220px;
+    width: 300px;
+    height: 300px;
     border-radius: 50%;
     object-fit: cover;
     margin-bottom: 50px;
