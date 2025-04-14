@@ -248,11 +248,11 @@
     });
   </script>
 
-  <!-- Spacer and News Ticker -->
+ <!-- Spacer and News Ticker -->
 <div style="height:50px;"></div>
 
 <div id="news-ticker" style="position:fixed;bottom:0;width:100%;background:#1a1a1a;color:#fff;overflow:hidden;z-index:1000;border-top:1px solid #333;padding:10px 0;font-size:14px;">
-  <div id="ticker-content" style="white-space:nowrap;display:inline-block;"></div>
+  <div id="ticker-content" style="white-space:nowrap;display:inline-block; will-change: transform;"></div>
 </div>
 
 <script>
@@ -263,7 +263,7 @@ const tickerContent = document.getElementById('ticker-content');
 const tickerElement = document.getElementById('news-ticker');
 
 // Set animation delay and speed
-const scrollSpeed = 400; // Time in seconds (this controls the speed)
+const scrollSpeed = 50; // Time in seconds (adjusted for smoother scroll speed)
 const animationDuration = scrollSpeed + 's';
 const introDelay = 3; // 3 seconds intro delay before animation starts
 
@@ -273,7 +273,7 @@ fetch(endpoint)
     if (data.results && data.results.length > 0) {
       const headlines = data.results.map(article => `📰 ${article.title}`).join(' | ');
       tickerContent.textContent = headlines;
-
+      
       // Set the scroll animation dynamically and delay before it starts
       tickerContent.style.animation = `scroll-news ${animationDuration} linear infinite`;
       tickerContent.style.animationDelay = `${introDelay}s`; // Delay before animation starts
@@ -295,10 +295,10 @@ fetch(endpoint)
 }
 
 #ticker-content {
-  white-space: nowrap;
   display: inline-block;
-  animation: scroll-news 400s linear infinite; /* Ensure continuous scrolling */
-  animation-delay: 3s; /* 3 seconds intro delay before starting scroll */
+  white-space: nowrap;
+  animation: scroll-news 50s linear infinite; /* Smooth scroll animation */
+  animation-delay: 3s; /* Delay before scrolling starts */
 }
 </style>
 
