@@ -1,75 +1,170 @@
-<!-- Hamburger Menu -->
-<style>
-  .menu-container {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    z-index: 999;
-    font-family: Papyrus, sans-serif;
-  }
+<!DOCTYPE html>
+<html lang="en">
 
-  .menu-toggle {
-    cursor: pointer;
-    width: 30px;
-    height: 24px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Josh Stafki – Omni Link</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Papyrus&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Papyrus, sans-serif;
+      background-color: #ffffff;
+      color: #333;
+    }
 
-  .menu-toggle div {
-    height: 4px;
-    background-color: #333;
-    border-radius: 2px;
-  }
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 2rem 1rem;
+    }
 
-  .dropdown-menu {
-    display: none;
-    position: absolute;
-    top: 2.5rem;
-    right: 0;
-    background-color: white;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    min-width: 120px;
-    text-align: right;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  }
+    .profile-img {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 2rem;
+      margin-top: 2rem;
+    }
 
-  .dropdown-menu a {
-    display: block;
-    padding: 10px 16px;
-    text-decoration: none;
-    color: #333;
-    transition: background 0.2s;
-  }
+    .link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 20px 0;
+      text-decoration: none;
+      color: #333;
+      font-size: 1.2rem;
+      transition: color 0.3s ease;
+    }
 
-  .dropdown-menu a:hover {
-    background-color: #f2f2f2;
-  }
+    .link:hover {
+      color: #6c63ff;
+    }
 
-  input[type=checkbox]:checked ~ .dropdown-menu {
-    display: block;
-  }
+    .link img {
+      width: 28px;
+      height: 28px;
+    }
 
-  input[type=checkbox] {
-    display: none;
-  }
-</style>
+    /* Hamburger Menu */
+    .menu-container {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      z-index: 999;
+    }
 
-<div class="menu-container">
-  <label for="menu-toggle">
-    <div class="menu-toggle">
-      <div></div>
-      <div></div>
-      <div></div>
+    .menu-toggle {
+      cursor: pointer;
+      width: 30px;
+      height: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .menu-toggle div {
+      height: 4px;
+      background-color: #333;
+      border-radius: 2px;
+    }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 2.5rem;
+      right: 0;
+      background-color: white;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      min-width: 120px;
+      text-align: right;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 10px 16px;
+      text-decoration: none;
+      color: #333;
+      transition: background 0.2s;
+    }
+
+    .dropdown-menu a:hover {
+      background-color: #f2f2f2;
+    }
+
+    input[type=checkbox]:checked ~ .dropdown-menu {
+      display: block;
+    }
+
+    input[type=checkbox] {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Hamburger Menu -->
+  <div class="menu-container">
+    <label for="menu-toggle">
+      <div class="menu-toggle">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </label>
+    <input type="checkbox" id="menu-toggle" />
+    <div class="dropdown-menu">
+      <a href="https://raw.githubusercontent.com/joshstafki/omni-link/main/Resume%202025.pdf" target="_blank">
+        Resume
+      </a>
     </div>
-  </label>
-  <input type="checkbox" id="menu-toggle" />
-  <div class="dropdown-menu">
-    <a href="https://raw.githubusercontent.com/joshstafki/omni-link/main/Resume%202025.pdf" target="_blank">
-      Resume
+  </div>
+
+  <div class="container">
+    <img class="profile-img" src="https://raw.githubusercontent.com/joshstafki/omni-link/main/IMG_9830.png" alt="Josh Stafki" />
+
+    <a class="link" href="https://www.instagram.com/yourhandle" target="_blank">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" />
+      Instagram
+    </a>
+
+    <a class="link" href="https://www.twitter.com/yourhandle" target="_blank">
+      <img src="https://loodibee.com/wp-content/uploads/Twitter-X-Logo-300x300.png" alt="X" />
+      X
+    </a>
+
+    <a class="link" href="https://open.spotify.com/user/yourhandle" target="_blank">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg" alt="Spotify" />
+      Spotify
+    </a>
+
+    <a class="link" href="https://www.intrepidflights.com" target="_blank">
+      <img src="https://lh3.googleusercontent.com/p/AF1QipPtHd6cUt0YyHZs3-K4_LlGuO-HjPDYltm3ma5P=w170-h213-n-k-no-nu" alt="Intrepid Flights" />
+      Intrepid Flights
+    </a>
+
+    <a class="link" href="mailto:josh@example.com" target="_blank">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Mail_%28iOS%29.svg" alt="Email" />
+      Email
+    </a>
+
+    <a class="link" href="https://www.sos.mn.gov/media/yfyadhpm/seal_1c_blk_outlined-final2024.png" target="_blank">
+      <img src="https://www.sos.mn.gov/media/yfyadhpm/seal_1c_blk_outlined-final2024.png" alt="Notary" />
+      MN Notary Public
     </a>
   </div>
-</div>
+</body>
+
+</html>
+
 
