@@ -158,6 +158,28 @@
     .toggle-checkbox:checked + .toggle-label::after {
       transform: translateX(20px);
     }
+
+    /* Ensure link text also turns white in dark mode */
+    body.dark-mode .link {
+      color: #f0f0f0;
+    }
+
+    body.dark-mode .menu-toggle div {
+      background-color: #f0f0f0;
+    }
+
+    body.dark-mode .dropdown-menu {
+      background-color: #333;
+      border-color: #555;
+    }
+
+    body.dark-mode .dropdown-menu a {
+      color: #f0f0f0;
+    }
+
+    body.dark-mode .dropdown-menu a:hover {
+      background-color: #555;
+    }
   </style>
 </head>
 
