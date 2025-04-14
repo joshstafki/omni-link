@@ -29,6 +29,8 @@
       align-items: center;
       justify-content: flex-start;
       padding: 2rem 1rem;
+      /* Add padding top to avoid overlap with fixed elements */
+      padding-top: 60px; /* Adjust as needed */
     }
 
     .profile-img {
@@ -37,7 +39,7 @@
       border-radius: 50%;
       object-fit: cover;
       margin-bottom: 2rem;
-      margin-top: 2rem;
+      /* Removed margin-top as padding-top on container handles space */
     }
 
     .link {
@@ -62,7 +64,7 @@
 
     /* Hamburger Menu */
     .menu-container {
-      position: absolute;
+      position: absolute; /* Changed to absolute to stay within flow */
       top: 1rem;
       right: 1rem;
       z-index: 999;
@@ -81,6 +83,7 @@
       height: 4px;
       background-color: #333;
       border-radius: 2px;
+      transition: background-color 0.3s ease; /* Added transition */
     }
 
     .dropdown-menu {
@@ -94,6 +97,7 @@
       min-width: 120px;
       text-align: right;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: background-color 0.3s ease, border-color 0.3s ease; /* Added transition */
     }
 
     .dropdown-menu a {
@@ -101,7 +105,7 @@
       padding: 10px 16px;
       text-decoration: none;
       color: #333;
-      transition: background 0.2s;
+      transition: background 0.2s, color 0.3s ease; /* Added color transition */
     }
 
     .dropdown-menu a:hover {
@@ -118,10 +122,10 @@
 
     /* Light/Dark Toggle */
     .toggle-container {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      z-index: 1000;
+      position: fixed; /* Keeps it fixed on screen */
+      top: 20px;       /* Position from the top */
+      left: 20px;      /* Position from the left */
+      z-index: 1000;   /* Ensure it's above other content */
     }
 
     .toggle-checkbox {
@@ -137,6 +141,7 @@
       border-radius: 15px;
       position: relative;
       cursor: pointer;
+      transition: background-color 0.3s ease; /* Added transition */
     }
 
     .toggle-label::after {
@@ -148,7 +153,7 @@
       background-color: white;
       top: 1px;
       left: 1px;
-      transition: transform 0.3s ease;
+      transition: transform 0.3s ease, background-color 0.3s ease; /* Added background transition */
     }
 
     .toggle-checkbox:checked + .toggle-label {
@@ -163,6 +168,10 @@
     body.dark-mode .link {
       color: #f0f0f0;
     }
+    body.dark-mode .link:hover { /* Add hover style for dark mode */
+        color: #aaa; /* Or another suitable light color */
+    }
+
 
     body.dark-mode .menu-toggle div {
       background-color: #f0f0f0;
@@ -180,6 +189,40 @@
     body.dark-mode .dropdown-menu a:hover {
       background-color: #555;
     }
+
+    /* News Ticker Styles */
+    #news-ticker {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background: #f0f0f0; /* Lighter background for light mode */
+      color: #333; /* Darker text for light mode */
+      overflow: hidden;
+      z-index: 1000;
+      border-top: 1px solid #ccc;
+      padding: 10px 0;
+      font-size: 14px;
+      transition: background-color 0.3s ease, color 0.3s ease, border-top-color 0.3s ease; /* Added transitions */
+    }
+    body.dark-mode #news-ticker {
+      background:#1a1a1a;
+      color:#fff;
+      border-top:1px solid #333;
+    }
+
+    #ticker-content {
+      display: inline-block;
+      white-space: nowrap;
+      visibility: visible; /* Ensure visibility once content is loaded */
+      animation: none; /* Start with no animation */
+      padding-left: 100%; /* Start off-screen */
+    }
+
+    @keyframes scroll-news {
+      0% { transform: translateX(0); } /* Start from padding-left position */
+      100% { transform: translateX(-100%); } /* Move left by its own width + padding */
+    }
+
   </style>
   <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -191,6 +234,11 @@
 </head>
 
 <body>
+  <div class="toggle-container">
+    <input type="checkbox" id="dark-mode-toggle" class="toggle-checkbox">
+    <label for="dark-mode-toggle" class="toggle-label"></label>
+  </div>
+
   <div class="menu-container">
     <label for="menu-toggle">
       <div class="menu-toggle">
@@ -217,7 +265,7 @@
 
     <a class="link" href="https://www.twitter.com/yourhandle" target="_blank">
       <img src="https://loodibee.com/wp-content/uploads/Twitter-X-Logo-300x300.png" alt="X" />
-      @joshstafki
+      X @joshstafki
     </a>
 
     <a class="link" href="https://open.spotify.com/user/yourhandle" target="_blank">
@@ -241,19 +289,87 @@
     </a>
   </div>
 
-  <div class="toggle-container">
-    <input type="checkbox" id="dark-mode-toggle" class="toggle-checkbox">
-    <label for="dark-mode-toggle" class="toggle-label"></label>
+  <div id="news-ticker">
+    <div id="ticker-content"></div>
   </div>
 
   <script>
     const darkModeToggle = document.getElementById('dark-mode-toggle');
     const body = document.body;
 
-    darkModeToggle.addEventListener('change', () => {
-      body.classList.toggle('dark-mode');
-    });
-  </script>
-</body>
+    // Function to apply theme based on checkbox state
+    function applyTheme() {
+        if (darkModeToggle.checked) {
+            body.classList.add('dark-mode');
+            localStorage.setItem('theme', 'dark'); // Save preference
+        } else {
+            body.classList.remove('dark-mode');
+            localStorage.setItem('theme', 'light'); // Save preference
+        }
+    }
 
+    // Check for saved theme preference on load
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+        darkModeToggle.checked = true;
+    } else {
+        darkModeToggle.checked = false; // Default to light if no preference or set to light
+    }
+    applyTheme(); // Apply the theme on initial load
+
+    // Add event listener for changes
+    darkModeToggle.addEventListener('change', applyTheme);
+
+
+    // News Ticker Script
+    const apiKey = 'pub_804092a966001b47e9c6a2ac6e7c9672d846e'; // Replace with your actual API key if needed
+    const endpoint = `https://newsdata.io/api/1/news?country=us&language=en&category=top&apikey=${apiKey}`;
+
+    const tickerContent = document.getElementById('ticker-content');
+    const tickerElement = document.getElementById('news-ticker');
+
+    fetch(endpoint)
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === "success" && data.results && data.results.length > 0) {
+          // Format the headlines to scroll through
+          const headlines = data.results.map(article => `📰 ${article.title}`).join('   |   '); // Added non-breaking spaces for better spacing
+
+          if (headlines) {
+            tickerContent.innerHTML = headlines; // Use innerHTML because of  
+
+            // Calculate animation duration based on content width
+            // Wait a frame for the browser to calculate the width
+            requestAnimationFrame(() => {
+                const contentWidth = tickerContent.offsetWidth;
+                const containerWidth = tickerElement.offsetWidth;
+                // Estimate duration: pixels to scroll / pixels per second
+                // Let's target roughly 60 pixels per second for speed
+                const scrollSpeed = 60; // pixels per second
+                const totalScrollDistance = contentWidth + containerWidth; // Distance to scroll to clear the screen
+                const animationDuration = totalScrollDistance / scrollSpeed; // duration in seconds
+
+                const introDelay = 3; // 3 seconds intro delay
+
+                // Set animation properties
+                tickerContent.style.animation = `scroll-news ${animationDuration}s linear ${introDelay}s infinite`;
+            });
+
+
+          } else {
+            tickerContent.textContent = '⚠️ No news available at the moment.';
+          }
+        } else {
+            console.error('News API response error or no results:', data);
+            tickerContent.textContent = '⚠️ No news available at the moment.';
+        }
+      })
+      .catch(error => {
+        tickerContent.textContent = '⚠️ Could not load news at this time.';
+        console.error('News API fetch error:', error);
+      });
+
+  </script>
+
+</body>
 </html>
