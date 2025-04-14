@@ -247,6 +247,37 @@
       body.classList.toggle('dark-mode');
     });
   </script>
+
+  <!-- Spacer and News Ticker -->
+<div style="height:50px;"></div>
+
+<div id="news-ticker" style="position:fixed;bottom:0;width:100%;background:#1a1a1a;color:#fff;overflow:hidden;z-index:1000;border-top:1px solid #333;padding:10px 0;font-size:14px;">
+  <div id="ticker-content" style="white-space:nowrap;display:inline-block;animation:scroll-news 25s linear infinite;"></div>
+</div>
+
+<script>
+const apiKey = 'pub_804092a966001b47e9c6a2ac6e7c9672d846e';
+const endpoint = `https://newsdata.io/api/1/news?country=us&language=en&category=top&apikey=${apiKey}`;
+
+fetch(endpoint)
+  .then(response => response.json())
+  .then(data => {
+    const headlines = data.results.map(article => `📰 ${article.title}`).join(' | ');
+    document.getElementById('ticker-content').textContent = headlines;
+  })
+  .catch(error => {
+    document.getElementById('ticker-content').textContent = '⚠️ Could not load news at this time.';
+    console.error('News API error:', error);
+  });
+</script>
+
+<style>
+@keyframes scroll-news {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+</style>
+
 </body>
 
 </html>
