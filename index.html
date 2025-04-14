@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Papyrus&display=swap" rel="stylesheet">
   <style>
+    /* --- Previous CSS styles --- */
     body {
       margin: 0;
       padding: 0;
@@ -29,8 +30,8 @@
       align-items: center;
       justify-content: flex-start;
       padding: 2rem 1rem;
-      /* Add padding top to avoid overlap with fixed elements */
-      padding-top: 60px; /* Adjust as needed */
+      padding-top: 60px; /* Space for fixed top elements */
+      padding-bottom: 60px; /* Space for fixed bottom ticker */
     }
 
     .profile-img {
@@ -39,7 +40,6 @@
       border-radius: 50%;
       object-fit: cover;
       margin-bottom: 2rem;
-      /* Removed margin-top as padding-top on container handles space */
     }
 
     .link {
@@ -64,10 +64,10 @@
 
     /* Hamburger Menu */
     .menu-container {
-      position: absolute; /* Changed to absolute to stay within flow */
+      position: fixed; /* Keep menu fixed */
       top: 1rem;
       right: 1rem;
-      z-index: 999;
+      z-index: 1001; /* Ensure menu is above ticker/toggle */
     }
 
     .menu-toggle {
@@ -83,7 +83,7 @@
       height: 4px;
       background-color: #333;
       border-radius: 2px;
-      transition: background-color 0.3s ease; /* Added transition */
+      transition: background-color 0.3s ease;
     }
 
     .dropdown-menu {
@@ -97,7 +97,7 @@
       min-width: 120px;
       text-align: right;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      transition: background-color 0.3s ease, border-color 0.3s ease; /* Added transition */
+      transition: background-color 0.3s ease, border-color 0.3s ease;
     }
 
     .dropdown-menu a {
@@ -105,7 +105,7 @@
       padding: 10px 16px;
       text-decoration: none;
       color: #333;
-      transition: background 0.2s, color 0.3s ease; /* Added color transition */
+      transition: background 0.2s, color 0.3s ease;
     }
 
     .dropdown-menu a:hover {
@@ -122,10 +122,10 @@
 
     /* Light/Dark Toggle */
     .toggle-container {
-      position: fixed; /* Keeps it fixed on screen */
-      top: 20px;       /* Position from the top */
-      left: 20px;      /* Position from the left */
-      z-index: 1000;   /* Ensure it's above other content */
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1000;
     }
 
     .toggle-checkbox {
@@ -141,7 +141,7 @@
       border-radius: 15px;
       position: relative;
       cursor: pointer;
-      transition: background-color 0.3s ease; /* Added transition */
+      transition: background-color 0.3s ease;
     }
 
     .toggle-label::after {
@@ -153,7 +153,7 @@
       background-color: white;
       top: 1px;
       left: 1px;
-      transition: transform 0.3s ease, background-color 0.3s ease; /* Added background transition */
+      transition: transform 0.3s ease, background-color 0.3s ease;
     }
 
     .toggle-checkbox:checked + .toggle-label {
@@ -164,45 +164,30 @@
       transform: translateX(20px);
     }
 
-    /* Ensure link text also turns white in dark mode */
-    body.dark-mode .link {
-      color: #f0f0f0;
-    }
-    body.dark-mode .link:hover { /* Add hover style for dark mode */
-        color: #aaa; /* Or another suitable light color */
-    }
+    /* Dark Mode Specific Styles */
+    body.dark-mode .link { color: #f0f0f0; }
+    body.dark-mode .link:hover { color: #aaa; }
+    body.dark-mode .menu-toggle div { background-color: #f0f0f0; }
+    body.dark-mode .dropdown-menu { background-color: #333; border-color: #555; }
+    body.dark-mode .dropdown-menu a { color: #f0f0f0; }
+    body.dark-mode .dropdown-menu a:hover { background-color: #555; }
 
 
-    body.dark-mode .menu-toggle div {
-      background-color: #f0f0f0;
-    }
-
-    body.dark-mode .dropdown-menu {
-      background-color: #333;
-      border-color: #555;
-    }
-
-    body.dark-mode .dropdown-menu a {
-      color: #f0f0f0;
-    }
-
-    body.dark-mode .dropdown-menu a:hover {
-      background-color: #555;
-    }
-
-    /* News Ticker Styles */
+    /* --- News Ticker Styles --- */
     #news-ticker {
       position: fixed;
       bottom: 0;
+      left: 0; /* Ensure it starts from the left edge */
       width: 100%;
-      background: #f0f0f0; /* Lighter background for light mode */
-      color: #333; /* Darker text for light mode */
+      background: #f0f0f0;
+      color: #333;
       overflow: hidden;
-      z-index: 1000;
+      z-index: 998; /* Below toggle/menu */
       border-top: 1px solid #ccc;
       padding: 10px 0;
       font-size: 14px;
-      transition: background-color 0.3s ease, color 0.3s ease, border-top-color 0.3s ease; /* Added transitions */
+      transition: background-color 0.3s ease, color 0.3s ease, border-top-color 0.3s ease;
+      cursor: default; /* Default cursor for the bar itself */
     }
     body.dark-mode #news-ticker {
       background:#1a1a1a;
@@ -211,12 +196,36 @@
     }
 
     #ticker-content {
-      display: inline-block;
+      display: inline-block; /* Changed from inline */
       white-space: nowrap;
-      visibility: visible; /* Ensure visibility once content is loaded */
-      animation: none; /* Start with no animation */
+      visibility: hidden; /* Hide until animation starts */
+      animation: none;
       padding-left: 100%; /* Start off-screen */
     }
+
+    /* --- NEW: Styles for clickable links within the ticker --- */
+    .ticker-link {
+        color: inherit; /* Use the parent ticker color */
+        text-decoration: none; /* No underline by default */
+        padding: 0 8px; /* Add spacing around link text */
+        cursor: pointer; /* Pointer cursor on hover */
+        white-space: nowrap; /* Prevent link text from wrapping */
+        display: inline-block; /* Treat as block for spacing */
+    }
+
+    .ticker-link:hover {
+        text-decoration: underline; /* Underline on hover */
+        opacity: 0.8; /* Slight visual feedback */
+    }
+
+    .ticker-separator {
+        padding: 0 5px; /* Spacing around the separator */
+        white-space: nowrap; /* Prevent wrapping */
+        display: inline-block; /* Treat as block for spacing */
+        cursor: default; /* Keep default cursor over separator */
+    }
+    /* --------------------------------------------------------- */
+
 
     @keyframes scroll-news {
       0% { transform: translateX(0); } /* Start from padding-left position */
@@ -250,72 +259,62 @@
 
   <div class="container">
     <img class="profile-img" src="https://raw.githubusercontent.com/joshstafki/omni-link/main/IMG_9830.png" alt="Josh Stafki" />
-
-    <a class="link" href="https://www.instagram.com/yourhandle" target="_blank">
+    <a class="link" href="https://www.instagram.com/joshstafki" target="_blank">
       <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" />
       Instagram(@joshstafki)
     </a>
-
-    <a class="link" href="https://www.twitter.com/yourhandle" target="_blank">
+    <a class="link" href="https://www.twitter.com/joshstafki" target="_blank">
       <img src="https://loodibee.com/wp-content/uploads/Twitter-X-Logo-300x300.png" alt="X" />
       X @joshstafki
     </a>
-
-    <a class="link" href="https://open.spotify.com/user/yourhandle" target="_blank">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg" alt="Spotify" />
-      Atrønautik on Spotify
+     <a class="link" href="https://open.spotify.com/artist/0jnCrDOl1FMOp3c20z8bwn" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg" alt="Spotify" />
+        Atrønautik on Spotify
     </a>
-
     <a class="link" href="https://www.intrepidflights.com" target="_blank">
-      <img src="https://lh3.googleusercontent.com/p/AF1QipPtHd6cUt0YyHZs3-K4_LlGuO-HjPDYltm3ma5P=w170-h213-n-k-no-nu" alt="Intrepid Flights" />
-      Intrepid Flights Photography
+        <img src="https://github.com/joshstafki/omni-link/blob/main/IF%20Logo.png?raw=true" alt="Intrepid Flights" />
+        Intrepid Flights Photography
     </a>
-
-    <a class="link" href="https://www.sos.mn.gov/media/yfyadhpm/seal_1c_blk_outlined-final2024.png" target="_blank">
-      <img src="https://www.sos.mn.gov/media/yfyadhpm/seal_1c_blk_outlined-final2024.png" alt="Notary" />
-      MN Notary Public
+    <a class="link" href="https://joshstafki.github.io/Notary-Public/" target="_blank">
+        <img src="https://www.sos.mn.gov/media/yfyadhpm/seal_1c_blk_outlined-final2024.png" alt="Notary" />
+        MN Notary Public
     </a>
-
-    <a class="link" href="mailto:josh@example.com" target="_blank">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Mail_%28iOS%29.svg" alt="Email" />
-      Contact Info
+    <a class="link" href="mailto:joshstafki@icloud.com" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Mail_%28iOS%29.svg" alt="Email" />
+        Contact Info
     </a>
   </div>
 
   <div id="news-ticker">
-    <div id="ticker-content"></div>
-  </div>
+    <div id="ticker-content"></div> </div>
 
   <script>
+    // --- Dark Mode Toggle Script ---
     const darkModeToggle = document.getElementById('dark-mode-toggle');
     const body = document.body;
 
-    // Function to apply theme based on checkbox state
     function applyTheme() {
         if (darkModeToggle.checked) {
             body.classList.add('dark-mode');
-            localStorage.setItem('theme', 'dark'); // Save preference
+            localStorage.setItem('theme', 'dark');
         } else {
             body.classList.remove('dark-mode');
-            localStorage.setItem('theme', 'light'); // Save preference
+            localStorage.setItem('theme', 'light');
         }
     }
-
-    // Check for saved theme preference on load
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'dark') {
         darkModeToggle.checked = true;
     } else {
-        darkModeToggle.checked = false; // Default to light if no preference or set to light
+        darkModeToggle.checked = false;
     }
-    applyTheme(); // Apply the theme on initial load
-
-    // Add event listener for changes
+    applyTheme();
     darkModeToggle.addEventListener('change', applyTheme);
 
 
-    // News Ticker Script
-    const apiKey = 'pub_804092a966001b47e9c6a2ac6e7c9672d846e'; // Replace with your actual API key if needed
+    // --- News Ticker Script (Modified) ---
+    const apiKey = 'pub_458092a966001b47e9c6a2ac6e7c9672d846e'; // Use your actual key
+    // Consider filtering for sources with actual links if needed
     const endpoint = `https://newsdata.io/api/1/news?country=us&language=en&category=top&apikey=${apiKey}`;
 
     const tickerContent = document.getElementById('ticker-content');
@@ -324,41 +323,73 @@
     fetch(endpoint)
       .then(response => response.json())
       .then(data => {
+        tickerContent.innerHTML = ''; // Clear previous content/loading message
+
         if (data.status === "success" && data.results && data.results.length > 0) {
-          // Format the headlines to scroll through
-          const headlines = data.results.map(article => `📰 ${article.title}`).join(' &nbsp; | &nbsp; '); // Added non-breaking spaces for better spacing
+            let hasContent = false;
+            data.results.forEach((article, index) => {
+                // *** MODIFICATION START ***
+                // Check if both title and link exist
+                if (article.title && article.link) {
+                    hasContent = true;
+                    // Create the link element
+                    const linkElement = document.createElement('a');
+                    linkElement.href = article.link;
+                    linkElement.textContent = `📰 ${article.title}`;
+                    linkElement.target = '_blank'; // Open in new tab
+                    linkElement.rel = 'noopener noreferrer'; // Security best practice
+                    linkElement.classList.add('ticker-link'); // Add class for styling
 
-          if (headlines) {
-            tickerContent.innerHTML = headlines; // Use innerHTML because of &nbsp;
+                    tickerContent.appendChild(linkElement);
 
-            // Calculate animation duration based on content width
-            // Wait a frame for the browser to calculate the width
-            requestAnimationFrame(() => {
-                const contentWidth = tickerContent.offsetWidth;
-                const containerWidth = tickerElement.offsetWidth;
-                // Estimate duration: pixels to scroll / pixels per second
-                // Let's target roughly 60 pixels per second for speed
-                const scrollSpeed = 60; // pixels per second
-                const totalScrollDistance = contentWidth + containerWidth; // Distance to scroll to clear the screen
-                const animationDuration = totalScrollDistance / scrollSpeed; // duration in seconds
-
-                const introDelay = 3; // 3 seconds intro delay
-
-                // Set animation properties
-                tickerContent.style.animation = `scroll-news ${animationDuration}s linear ${introDelay}s infinite`;
+                    // Add separator if not the last item
+                    if (index < data.results.length - 1) {
+                        const separator = document.createElement('span');
+                        separator.textContent = '   |   '; // Use non-breaking spaces
+                        separator.classList.add('ticker-separator'); // Add class for styling
+                        tickerContent.appendChild(separator);
+                    }
+                }
+                // *** MODIFICATION END ***
             });
 
+            if (hasContent) {
+                // Calculate animation duration based on new content width
+                requestAnimationFrame(() => { // Wait for browser to render links
+                    const contentWidth = tickerContent.scrollWidth; // Use scrollWidth for potential overflow
+                    const containerWidth = tickerElement.offsetWidth;
+                    const scrollSpeed = 60; // pixels per second (adjust as needed)
+                    const totalScrollDistance = contentWidth; // Scroll the content width itself
+                    const animationDuration = totalScrollDistance / scrollSpeed;
+                    const introDelay = 3; // seconds
 
-          } else {
-            tickerContent.textContent = '⚠️ No news available at the moment.';
-          }
+                    // Apply animation only if duration is valid
+                    if (animationDuration > 0) {
+                       tickerContent.style.animation = `scroll-news ${animationDuration}s linear ${introDelay}s infinite`;
+                       tickerContent.style.visibility = 'visible'; // Make it visible now
+                    } else {
+                        tickerContent.style.paddingLeft = '0'; // Remove padding if no animation (content fits)
+                        tickerContent.style.visibility = 'visible';
+                    }
+
+                });
+            } else {
+                 tickerContent.textContent = '⚠️ No news articles with links available.';
+                 tickerContent.style.visibility = 'visible';
+                 tickerContent.style.paddingLeft = '0'; // Center text if no animation
+            }
+
         } else {
             console.error('News API response error or no results:', data);
             tickerContent.textContent = '⚠️ No news available at the moment.';
+            tickerContent.style.visibility = 'visible';
+            tickerContent.style.paddingLeft = '0';
         }
       })
       .catch(error => {
         tickerContent.textContent = '⚠️ Could not load news at this time.';
+        tickerContent.style.visibility = 'visible';
+        tickerContent.style.paddingLeft = '0';
         console.error('News API fetch error:', error);
       });
 
