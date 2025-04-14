@@ -15,6 +15,12 @@
       font-family: Papyrus, sans-serif;
       background-color: #ffffff;
       color: #333;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    body.dark-mode {
+      background-color: #1a1a1a;
+      color: #f0f0f0;
     }
 
     .container {
@@ -109,11 +115,53 @@
     input[type=checkbox] {
       display: none;
     }
+
+    /* Light/Dark Toggle */
+    .toggle-container {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1000;
+    }
+
+    .toggle-checkbox {
+      position: absolute;
+      opacity: 0;
+    }
+
+    .toggle-label {
+      display: inline-block;
+      width: 40px;
+      height: 20px;
+      background-color: #ccc;
+      border-radius: 15px;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .toggle-label::after {
+      content: '';
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background-color: white;
+      top: 1px;
+      left: 1px;
+      transition: transform 0.3s ease;
+    }
+
+    .toggle-checkbox:checked + .toggle-label {
+      background-color: #6c63ff;
+    }
+
+    .toggle-checkbox:checked + .toggle-label::after {
+      transform: translateX(20px);
+    }
   </style>
 </head>
 
 <body>
-  <!-- Hamburger Menu -->
   <div class="menu-container">
     <label for="menu-toggle">
       <div class="menu-toggle">
@@ -153,16 +201,30 @@
       Intrepid Flights Photography
     </a>
 
-    <a class="link" href="mailto:josh@example.com" target="_blank">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Mail_%28iOS%29.svg" alt="Email" />
-      Contact Info
-    </a>
-
     <a class="link" href="https://www.sos.mn.gov/media/yfyadhpm/seal_1c_blk_outlined-final2024.png" target="_blank">
       <img src="https://www.sos.mn.gov/media/yfyadhpm/seal_1c_blk_outlined-final2024.png" alt="Notary" />
       MN Notary Public
     </a>
+
+    <a class="link" href="mailto:josh@example.com" target="_blank">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Mail_%28iOS%29.svg" alt="Email" />
+      Contact Info
+    </a>
   </div>
+
+  <div class="toggle-container">
+    <input type="checkbox" id="dark-mode-toggle" class="toggle-checkbox">
+    <label for="dark-mode-toggle" class="toggle-label"></label>
+  </div>
+
+  <script>
+    const darkModeToggle = document.getElementById('dark-mode-toggle');
+    const body = document.body;
+
+    darkModeToggle.addEventListener('change', () => {
+      body.classList.toggle('dark-mode');
+    });
+  </script>
 </body>
 
 </html>
