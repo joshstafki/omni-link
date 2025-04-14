@@ -252,7 +252,7 @@
 <div style="height:50px;"></div>
 
 <div id="news-ticker" style="position:fixed;bottom:0;width:100%;background:#1a1a1a;color:#fff;overflow:hidden;z-index:1000;border-top:1px solid #333;padding:10px 0;font-size:14px;">
-  <div id="ticker-content" style="white-space:nowrap;display:inline-block; will-change: transform;"></div>
+  <div id="ticker-content" style="white-space:nowrap;display:inline-block;"></div>
 </div>
 
 <script>
@@ -271,12 +271,19 @@ fetch(endpoint)
   .then(response => response.json())
   .then(data => {
     if (data.results && data.results.length > 0) {
+      // Format the headlines to scroll through
       const headlines = data.results.map(article => `📰 ${article.title}`).join(' | ');
-      tickerContent.textContent = headlines;
       
-      // Set the scroll animation dynamically and delay before it starts
-      tickerContent.style.animation = `scroll-news ${animationDuration} linear infinite`;
-      tickerContent.style.animationDelay = `${introDelay}s`; // Delay before animation starts
+      // Check if there are headlines and assign the text
+      if (headlines) {
+        tickerContent.textContent = headlines;
+
+        // Once content is loaded, start animation
+        tickerContent.style.animation = `scroll-news ${animationDuration} linear infinite`;
+        tickerContent.style.animationDelay = `${introDelay}s`; // Delay before animation starts
+      } else {
+        tickerContent.textContent = '⚠️ No news available at the moment.';
+      }
     } else {
       tickerContent.textContent = '⚠️ No news available at the moment.';
     }
@@ -297,13 +304,12 @@ fetch(endpoint)
 #ticker-content {
   display: inline-block;
   white-space: nowrap;
-  animation: scroll-news 50s linear infinite; /* Smooth scroll animation */
-  animation-delay: 3s; /* Delay before scrolling starts */
+  visibility: visible; /* Ensure visibility once content is loaded */
+  animation: none; /* Start with no animation */
 }
 </style>
 
-
-
+  
 </body>
 
 </html>
