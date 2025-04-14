@@ -295,7 +295,10 @@ fetch(endpoint)
 }
 
 #ticker-content {
-  animation: scroll-news 400s linear infinite;
+  white-space: nowrap;
+  display: inline-block;
+  animation: scroll-news 400s linear infinite; /* Ensure continuous scrolling */
+  animation-delay: 3s; /* 3 seconds intro delay before starting scroll */
 }
 </style>
 
