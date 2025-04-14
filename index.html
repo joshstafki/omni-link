@@ -61,6 +61,60 @@
       background-color: var(--bg-dark);
       color: var(--text-dark);
     }
+
+    /* Toggle switch */
+    .toggle-container {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 42px;
+      height: 24px;
+    }
+
+    .toggle-switch {
+      position: relative;
+      display: inline-block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .toggle-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      transition: 0.4s;
+      border-radius: 24px;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: 0.4s;
+      border-radius: 50%;
+    }
+
+    input:checked + .slider {
+      background-color: #2196F3;
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(18px);
+    }
   </style>
 </head>
 <body>
@@ -106,17 +160,32 @@
     <a href="mailto:joshstafki@gmail.com" target="_blank">Contact Info</a>
   </div>
 
+  <!-- Toggle -->
+  <div class="toggle-container">
+    <label class="toggle-switch">
+      <input type="checkbox" id="modeToggle">
+      <span class="slider"></span>
+    </label>
+  </div>
+
   <script>
     const hour = new Date().getHours();
-    if (hour >= 18 || hour < 6) {
-      document.body.classList.add('dark-mode');
-    } else {
-      document.body.classList.add('light-mode');
+    const prefersDark = hour >= 18 || hour < 6;
+    const body = document.body;
+    const toggle = document.getElementById('modeToggle');
+
+    function applyMode(dark) {
+      body.classList.toggle('dark-mode', dark);
+      body.classList.toggle('light-mode', !dark);
+      toggle.checked = dark;
     }
+
+    // Initial mode
+    applyMode(prefersDark);
+
+    toggle.addEventListener('change', () => {
+      applyMode(toggle.checked);
+    });
   </script>
-</body>
-</html>
-
-
 </body>
 </html>
