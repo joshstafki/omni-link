@@ -1,191 +1,75 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Josh Stafki – All My Links</title>
-  <style>
-    :root {
-      --bg-light: #ffffff;
-      --bg-dark: #121212;
-      --text-light: #000000;
-      --text-dark: #f5f5f5;
-    }
+<!-- Hamburger Menu -->
+<style>
+  .menu-container {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 999;
+    font-family: Papyrus, sans-serif;
+  }
 
-    body {
-      margin: 0;
-      padding: 2rem;
-      font-family: Papyrus, sans-serif;
-      text-align: center;
-      transition: background-color 0.3s, color 0.3s;
-    }
+  .menu-toggle {
+    cursor: pointer;
+    width: 30px;
+    height: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
 
-    .profile-img {
-      width: 160px;
-      height: 160px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin-bottom: 1.5rem;
-    }
+  .menu-toggle div {
+    height: 4px;
+    background-color: #333;
+    border-radius: 2px;
+  }
 
-    .name {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 2.5rem;
+    right: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    min-width: 120px;
+    text-align: right;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
 
-    .link-container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.75rem;
-      margin: 1.5rem 0;
-    }
+  .dropdown-menu a {
+    display: block;
+    padding: 10px 16px;
+    text-decoration: none;
+    color: #333;
+    transition: background 0.2s;
+  }
 
-    .link-container img {
-      width: 28px;
-      height: 28px;
-    }
+  .dropdown-menu a:hover {
+    background-color: #f2f2f2;
+  }
 
-    a {
-      text-decoration: none;
-      color: inherit;
-      font-size: 1.15rem;
-    }
+  input[type=checkbox]:checked ~ .dropdown-menu {
+    display: block;
+  }
 
-    .light-mode {
-      background-color: var(--bg-light);
-      color: var(--text-light);
-    }
+  input[type=checkbox] {
+    display: none;
+  }
+</style>
 
-    .dark-mode {
-      background-color: var(--bg-dark);
-      color: var(--text-dark);
-    }
-
-    /* Toggle switch */
-    .toggle-container {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      width: 42px;
-      height: 24px;
-    }
-
-    .toggle-switch {
-      position: relative;
-      display: inline-block;
-      width: 100%;
-      height: 100%;
-    }
-
-    .toggle-switch input {
-      opacity: 0;
-      width: 0;
-      height: 0;
-    }
-
-    .slider {
-      position: absolute;
-      cursor: pointer;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: #ccc;
-      transition: 0.4s;
-      border-radius: 24px;
-    }
-
-    .slider:before {
-      position: absolute;
-      content: "";
-      height: 18px;
-      width: 18px;
-      left: 3px;
-      bottom: 3px;
-      background-color: white;
-      transition: 0.4s;
-      border-radius: 50%;
-    }
-
-    input:checked + .slider {
-      background-color: #2196F3;
-    }
-
-    input:checked + .slider:before {
-      transform: translateX(18px);
-    }
-  </style>
-</head>
-<body>
-  <img src="https://raw.githubusercontent.com/joshstafki/omni-link/main/IMG_9830.png" alt="Josh Stafki" class="profile-img" />
-
-  <div class="name">Josh Stafki</div>
-  <div>All My Links</div>
-  <div style="margin-top: 1rem; font-size: 0.9rem;">Site built using GitHub</div>
-
-  <!-- Instagram -->
-  <div class="link-container">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" />
-    <a href="https://www.instagram.com/joshstafki?igsh=emQ3YWplM2ZneTFz&utm_source=qr" target="_blank">@joshstafki</a>
+<div class="menu-container">
+  <label for="menu-toggle">
+    <div class="menu-toggle">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </label>
+  <input type="checkbox" id="menu-toggle" />
+  <div class="dropdown-menu">
+    <a href="https://raw.githubusercontent.com/joshstafki/omni-link/main/Resume%202025.pdf" target="_blank">
+      Resume
+    </a>
   </div>
+</div>
 
-  <!-- X / Twitter -->
-  <div class="link-container">
-    <img src="https://loodibee.com/wp-content/uploads/Twitter-X-Logo-300x300.png" alt="X" />
-    <a href="https://x.com/joshstafki?s=21" target="_blank">@joshstafki</a>
-  </div>
-
-  <!-- Spotify -->
-  <div class="link-container">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/8/84/Spotify_icon.svg" alt="Spotify" />
-    <a href="https://open.spotify.com/user/31coy7zzjdxsugr3i3dlcxx4whsu?si=Wz6ICs4bTZm8EGK3yffzEA" target="_blank">Astønautik</a>
-  </div>
-
-  <!-- Photography -->
-  <div class="link-container">
-    <img src="https://lh3.googleusercontent.com/p/AF1QipPtHd6cUt0YyHZs3-K4_LlGuO-HjPDYltm3ma5P=w170-h213-n-k-no-nu" alt="Plane" />
-    <a href="https://www.intrepidflights.com" target="_blank">Intrepid Flights Photography</a>
-  </div>
-
-  <!-- Notary -->
-  <div class="link-container">
-    <img src="https://www.sos.mn.gov/media/yfyadhpm/seal_1c_blk_outlined-final2024.png" alt="MN Notary" />
-    <a href="https://notary.sos.mn.gov/Notary/NotaryDetails?notaryMasterId=b1b201ad-7a3b-ee11-9076-00155d01c440" target="_blank">Certified MN Notary Public</a>
-  </div>
-
-  <!-- Email -->
-  <div class="link-container">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Mail_%28iOS%29.svg" alt="Email" />
-    <a href="mailto:joshstafki@gmail.com" target="_blank">Contact Info</a>
-  </div>
-
-  <!-- Toggle -->
-  <div class="toggle-container">
-    <label class="toggle-switch">
-      <input type="checkbox" id="modeToggle">
-      <span class="slider"></span>
-    </label>
-  </div>
-
-  <script>
-    const hour = new Date().getHours();
-    const prefersDark = hour >= 18 || hour < 6;
-    const body = document.body;
-    const toggle = document.getElementById('modeToggle');
-
-    function applyMode(dark) {
-      body.classList.toggle('dark-mode', dark);
-      body.classList.toggle('light-mode', !dark);
-      toggle.checked = dark;
-    }
-
-    // Initial mode
-    applyMode(prefersDark);
-
-    toggle.addEventListener('change', () => {
-      applyMode(toggle.checked);
-    });
-  </script>
-</body>
-</html>
