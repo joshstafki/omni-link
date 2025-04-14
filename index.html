@@ -1,285 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Josh Stafki – Omni Link</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Papyrus&display=swap" rel="stylesheet">
+  <title>All My Links</title>
   <style>
     body {
+      font-family: sans-serif;
       margin: 0;
       padding: 0;
-      font-family: Papyrus, sans-serif;
-      background-color: #ffffff;
+      background: #f9f9f9;
       color: #333;
-      transition: background-color 0.3s ease, color 0.3s ease;
-    }
-
-    body.dark-mode {
-      background-color: #1a1a1a;
-      color: #f0f0f0;
     }
 
     .container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      padding: 2rem 1rem;
-    }
-
-    .profile-img {
-      width: 200px;
-      height: 200px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin-bottom: 2rem;
-      margin-top: 2rem;
+      max-width: 600px;
+      margin: 60px auto 100px auto;
+      padding: 20px;
+      text-align: center;
     }
 
     .link {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin: 20px 0;
+      display: block;
+      margin: 15px 0;
+      padding: 12px 20px;
+      background: #1a1a1a;
+      color: #fff;
       text-decoration: none;
-      color: #333;
-      font-size: 1.2rem;
-      transition: color 0.3s ease;
+      border-radius: 8px;
+      transition: background 0.3s;
     }
 
     .link:hover {
-      color: #6c63ff;
+      background: #333;
     }
 
-    .link img {
-      width: 28px;
-      height: 28px;
-    }
-
-    /* Hamburger Menu */
-    .menu-container {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      z-index: 999;
-    }
-
-    .menu-toggle {
-      cursor: pointer;
-      width: 30px;
-      height: 24px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .menu-toggle div {
-      height: 4px;
-      background-color: #333;
-      border-radius: 2px;
-    }
-
-    .dropdown-menu {
-      display: none;
-      position: absolute;
-      top: 2.5rem;
-      right: 0;
-      background-color: white;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      min-width: 120px;
-      text-align: right;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-
-    .dropdown-menu a {
-      display: block;
-      padding: 10px 16px;
-      text-decoration: none;
-      color: #333;
-      transition: background 0.2s;
-    }
-
-    .dropdown-menu a:hover {
-      background-color: #f2f2f2;
-    }
-
-    input[type=checkbox]:checked ~ .dropdown-menu {
-      display: block;
-    }
-
-    input[type=checkbox] {
-      display: none;
-    }
-
-    /* Light/Dark Toggle */
-    .toggle-container {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      z-index: 1000;
-    }
-
-    .toggle-checkbox {
-      position: absolute;
-      opacity: 0;
-    }
-
-    .toggle-label {
-      display: inline-block;
-      width: 40px;
-      height: 20px;
-      background-color: #ccc;
-      border-radius: 15px;
-      position: relative;
-      cursor: pointer;
-    }
-
-    .toggle-label::after {
-      content: '';
-      position: absolute;
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      background-color: white;
-      top: 1px;
-      left: 1px;
-      transition: transform 0.3s ease;
-    }
-
-    .toggle-checkbox:checked + .toggle-label {
-      background-color: #6c63ff;
-    }
-
-    .toggle-checkbox:checked + .toggle-label::after {
-      transform: translateX(20px);
-    }
-
-    /* Ensure link text also turns white in dark mode */
-    body.dark-mode .link {
-      color: #f0f0f0;
-    }
-
-    body.dark-mode .menu-toggle div {
-      background-color: #f0f0f0;
-    }
-
-    body.dark-mode .dropdown-menu {
-      background-color: #333;
-      border-color: #555;
-    }
-
-    body.dark-mode .dropdown-menu a {
-      color: #f0f0f0;
-    }
-
-    body.dark-mode .dropdown-menu a:hover {
-      background-color: #555;
+    @keyframes scroll-news {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
     }
   </style>
 </head>
-
 <body>
-  <div class="menu-container">
-    <label for="menu-toggle">
-      <div class="menu-toggle">
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
-    </label>
-    <input type="checkbox" id="menu-toggle" />
-    <div class="dropdown-menu">
-      <a href="https://raw.githubusercontent.com/joshstafki/omni-link/main/Resume%202025.pdf" target="_blank">
-        Resume
-      </a>
-    </div>
-  </div>
 
   <div class="container">
-    <img class="profile-img" src="https://raw.githubusercontent.com/joshstafki/omni-link/main/IMG_9830.png" alt="Josh Stafki" />
-
-    <a class="link" href="https://www.instagram.com/yourhandle" target="_blank">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" />
-      Instagram(@joshstafki)
-    </a>
-
-    <a class="link" href="https://www.twitter.com/yourhandle" target="_blank">
-      <img src="https://loodibee.com/wp-content/uploads/Twitter-X-Logo-300x300.png" alt="X" />
-      X @joshstafki
-    </a>
-
-    <a class="link" href="https://open.spotify.com/user/yourhandle" target="_blank">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg" alt="Spotify" />
-      Atrønautik on Spotify
-    </a>
-
-    <a class="link" href="https://www.intrepidflights.com" target="_blank">
-      <img src="https://lh3.googleusercontent.com/p/AF1QipPtHd6cUt0YyHZs3-K4_LlGuO-HjPDYltm3ma5P=w170-h213-n-k-no-nu" alt="Intrepid Flights" />
-      Intrepid Flights Photography
-    </a>
-
-    <a class="link" href="https://www.sos.mn.gov/media/yfyadhpm/seal_1c_blk_outlined-final2024.png" target="_blank">
-      <img src="https://www.sos.mn.gov/media/yfyadhpm/seal_1c_blk_outlined-final2024.png" alt="Notary" />
-      MN Notary Public
-    </a>
-
-    <a class="link" href="mailto:josh@example.com" target="_blank">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Mail_%28iOS%29.svg" alt="Email" />
-      Contact Info
-    </a>
+    <h1>Josh's Links</h1>
+    <a class="link" href="https://instagram.com" target="_blank">Instagram</a>
+    <a class="link" href="https://twitter.com" target="_blank">Twitter</a>
+    <a class="link" href="https://spotify.com" target="_blank">Spotify</a>
+    <a class="link" href="https://github.com" target="_blank">GitHub</a>
+    <a class="link" href="mailto:your@email.com">Email Me</a>
+    <!-- Add more links here if needed -->
   </div>
 
-  <div class="toggle-container">
-    <input type="checkbox" id="dark-mode-toggle" class="toggle-checkbox">
-    <label for="dark-mode-toggle" class="toggle-label"></label>
+  <!-- Spacer and News Ticker -->
+  <div style="height:50px;"></div>
+
+  <div id="news-ticker" style="position:fixed;bottom:0;width:100%;background:#1a1a1a;color:#fff;overflow:hidden;z-index:1000;border-top:1px solid #333;padding:10px 0;font-size:14px;">
+    <div id="ticker-content" style="white-space:nowrap;display:inline-block;animation:scroll-news 25s linear infinite;"></div>
   </div>
 
   <script>
-    const darkModeToggle = document.getElementById('dark-mode-toggle');
-    const body = document.body;
+    const apiKey = 'c247c7492aa347eb8a4f82b217aa5fa2';
+    const endpoint = `https://cors-anywhere.herokuapp.com/https://newsapi.org/v2/top-headlines?country=us&pageSize=5&apiKey=${apiKey}`;
 
-    darkModeToggle.addEventListener('change', () => {
-      body.classList.toggle('dark-mode');
-    });
+    // Unlock access to the proxy
+    fetch('https://cors-anywhere.herokuapp.com/corsdemo')
+      .then(() => fetch(endpoint))
+      .then(response => response.json())
+      .then(data => {
+        const headlines = data.articles.map(article => `📰 ${article.title}`).join(' | ');
+        document.getElementById('ticker-content').textContent = headlines;
+      })
+      .catch(error => {
+        document.getElementById('ticker-content').textContent = '⚠️ Could not load news at this time.';
+        console.error('News API error:', error);
+      });
   </script>
-<!-- Your links and other content -->
 
-<!-- 👇 Paste this just before the closing body tag -->
-<!-- Spacer and News Ticker -->
-<div style="height:50px;"></div>
-
-<div id="news-ticker" style="position:fixed;bottom:0;width:100%;background:#1a1a1a;color:#fff;overflow:hidden;z-index:1000;border-top:1px solid #333;padding:10px 0;font-size:14px;">
-  <div id="ticker-content" style="white-space:nowrap;display:inline-block;animation:scroll-news 25s linear infinite;"></div>
-</div>
-
-<script>
-const apiKey = 'c247c7492aa347eb8a4f82b217aa5fa2';
-const endpoint = `https://newsapi.org/v2/top-headlines?country=us&pageSize=5&apiKey=${apiKey}`;
-
-fetch(endpoint)
-  .then(response => response.json())
-  .then(data => {
-    const headlines = data.articles.map(article => `📰 ${article.title}`).join(' | ');
-    document.getElementById('ticker-content').textContent = headlines;
-  })
-  .catch(error => {
-    document.getElementById('ticker-content').textContent = '⚠️ Could not load news at this time.';
-    console.error('News API error:', error);
-  });
-</script>
-
-<style>
-@keyframes scroll-news {
-  0% { transform: translateX(100%); }
-  100% { transform: translateX(-100%); }
-}
-</style>
-  
 </body>
 </html>
-
