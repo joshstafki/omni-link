@@ -5,7 +5,100 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>All My Links - Josh Stafki</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Base styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fff;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .dark-mode {
+            background-color: #121212;
+            color: #fff;
+        }
+
+        /* Link and icon styling */
+        .link {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .link-icon {
+            width: 25px;
+            height: 25px;
+            margin-right: 10px;
+        }
+
+        .header-content {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+        }
+
+        /* Theme toggle button */
+        .theme-toggle-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 20px;
+        }
+
+        /* Dropdown menu for resume */
+        .hamburger-menu {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            cursor: pointer;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            min-width: 160px;
+            z-index: 1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 10px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #f1f1f1;
+        }
+    </style>
     <script>
         // Function to toggle between light and dark mode
         function toggleTheme() {
@@ -51,7 +144,7 @@
             </a>
 
             <a href="https://x.com/joshstafki?s=21" target="_blank" class="link">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/X_Logo_2023.png/800px-X_Logo_2023.png" alt="X Logo" class="link-icon">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/X_Logo_2023.png" alt="X Logo" class="link-icon">
                 @joshstafki
             </a>
 
