@@ -172,7 +172,6 @@
         color: #aaa; /* Or another suitable light color */
     }
 
-
     body.dark-mode .menu-toggle div {
       background-color: #f0f0f0;
     }
@@ -222,7 +221,6 @@
       0% { transform: translateX(0); } /* Start from padding-left position */
       100% { transform: translateX(-100%); } /* Move left by its own width + padding */
     }
-
   </style>
   <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -230,7 +228,7 @@
         t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "r44i0mtmkx");
-</script>
+  </script>
 </head>
 
 <body>
@@ -258,17 +256,17 @@
   <div class="container">
     <img class="profile-img" src="https://raw.githubusercontent.com/joshstafki/omni-link/main/IMG_9830.png" alt="Josh Stafki" />
 
-    <a class="link" href="https://www.instagram.com/yourhandle" target="_blank">
+    <a class="link" href="https://www.instagram.com/joshstafki" target="_blank">
       <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" />
       Instagram(@joshstafki)
     </a>
 
-    <a class="link" href="https://www.twitter.com/yourhandle" target="_blank">
+    <a class="link" href="https://www.twitter.com/joshstafki" target="_blank">
       <img src="https://loodibee.com/wp-content/uploads/Twitter-X-Logo-300x300.png" alt="X" />
       X @joshstafki
     </a>
 
-    <a class="link" href="https://open.spotify.com/user/yourhandle" target="_blank">
+    <a class="link" href="https://open.spotify.com/user/Astønautik" target="_blank">
       <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg" alt="Spotify" />
       Atrønautik on Spotify
     </a>
@@ -320,7 +318,6 @@
     // Add event listener for changes
     darkModeToggle.addEventListener('change', applyTheme);
 
-
     // News Ticker Script
     const apiKey = 'pub_804092a966001b47e9c6a2ac6e7c9672d846e'; // Replace with your actual API key if needed
     const endpoint = `https://newsdata.io/api/1/news?country=us&language=en&category=top&apikey=${apiKey}`;
@@ -333,7 +330,7 @@
       .then(data => {
         if (data.status === "success" && data.results && data.results.length > 0) {
           // Format the headlines to scroll through
-          const headlines = data.results.map(article => `📰 ${article.title}`).join('   |   '); // Added non-breaking spaces for better spacing
+          const headlines = data.results.map(article => `📰 ${article.title}`).join('   |   ');
 
           if (headlines) {
             tickerContent.innerHTML = headlines; // Use innerHTML because of  
@@ -351,10 +348,9 @@
 
                 const introDelay = 3; // 3 seconds intro delay
 
-                // Set animation properties
+                // Set animation properties using template literal
                 tickerContent.style.animation = `scroll-news ${animationDuration}s linear ${introDelay}s infinite`;
             });
-
 
           } else {
             tickerContent.textContent = '⚠️ No news available at the moment.';
@@ -368,7 +364,6 @@
         tickerContent.textContent = '⚠️ Could not load news at this time.';
         console.error('News API fetch error:', error);
       });
-
   </script>
 
 </body>
