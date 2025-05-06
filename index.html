@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -274,6 +275,13 @@
     >
       Inquiry Contact Form
     </a>
+        <a
+      href="https://www.buymeacoffee.com/joshstafki"
+      target="_blank"
+    >
+     Buy Me a Coffee
+    </a>
+
   </div>
 </div>
 
@@ -358,10 +366,10 @@
       .then(data => {
         if (data.status === "success" && data.results && data.results.length > 0) {
           // Format the headlines to scroll through
-          const headlines = data.results.map(article => `📰 ${article.title}`).join('   |   ');
+          const headlines = data.results.map(article => `📰 ${article.title}`).join('   |   ');
 
           if (headlines) {
-            tickerContent.innerHTML = headlines; // Use innerHTML because of  
+            tickerContent.innerHTML = headlines; // Use innerHTML because of  
 
             // Calculate animation duration based on content width
             // Wait a frame for the browser to calculate the width
@@ -396,3 +404,4 @@
 
 </body>
 </html>
+
